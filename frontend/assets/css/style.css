@@ -1,0 +1,30 @@
+/* Reset Básico e Fontes Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #f3f4f6; /* Fundo cinza claro para destacar as telas */
+    color: #1f2937; /* Texto escuro acinzentado */
+}
+
+/* Botão Padrão do Sistema */
+.btn-primary {
+    background-color: #2563eb; /* Azul corporativo */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8; /* Azul mais escuro no hover */
+}

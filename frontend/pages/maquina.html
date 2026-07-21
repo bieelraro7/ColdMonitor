@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColdMonitor - Detalhes da Câmara</title>
+    
+    <!-- Fonte Google e Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Chart.js para os Gráficos Profissionais -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/maquina.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-content">
+            <div class="logo-small">
+                <i class="ph ph-thermometer-snow"></i>
+                <span>ColdMonitor</span>
+            </div>
+            <a href="dashboard.html" class="btn-back">
+                <i class="ph ph-arrow-left"></i> Voltar ao Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="details-container">
+        <!-- Cabeçalho dinâmico da Máquina -->
+        <div class="machine-header">
+            <div>
+                <h1 id="machineName">Carregando...</h1>
+                <p id="machineLocation"><i class="ph ph-map-pin"></i> ---</p>
+            </div>
+            <span id="machineStatus" class="status-badge">---</span>
+        </div>
+
+        <!-- Grid de Métricas Atuais (Cards Rápidos) -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon blue"><i class="ph ph-thermometer"></i></div>
+                <div class="metric-info">
+                    <p>Temperatura Atual</p>
+                    <h3 id="currentTemp">--°C</h3>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon green"><i class="ph ph-target"></i></div>
+                <div class="metric-info">
+                    <p>Temperatura Alvo</p>
+                    <h3 id="targetTemp">--°C</h3>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon orange"><i class="ph ph-drop"></i></div>
+                <div class="metric-info">
+                    <p>Umidade Relativa</p>
+                    <h3>45%</h3>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon purple"><i class="ph ph-engine"></i></div>
+                <div class="metric-info">
+                    <p>Compressor</p>
+                    <h3 id="compressorStatus">Ligado</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção do Gráfico Histórico -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <h2>Histórico de Temperatura (Últimas 6 Horas)</h2>
+                <span class="live-indicator"><span class="dot"></span> Monitoramento em Tempo Real</span>
+            </div>
+            <div class="chart-container">
+                <canvas id="tempChart"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/maquina.js"></script>
+</body>
+</html>

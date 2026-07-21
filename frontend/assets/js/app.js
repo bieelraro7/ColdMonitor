@@ -1,0 +1,1 @@
+console.log("ColdMonitor iniciado com sucesso!");

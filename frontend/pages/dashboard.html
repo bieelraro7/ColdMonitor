@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColdMonitor - Dashboard</title>
+    
+    <!-- Fonte Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- LINHA QUE ESTÁ FALTANDO: Importar os estilos do Modal -->
+    <link rel="stylesheet" href="../assets/css/components.css">
+    
+    <!-- Seus outros arquivos CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    
+    <!-- Ícones Phosphor -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Barra Superior -->
+    <header class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: #fff; border-bottom: 1px solid #e5e7eb;">
+    <h1 style="margin: 0; font-size: 24px;">ColdMonitor</h1>
+    
+    <div class="user-profile" style="display: flex; align-items: center; gap: 15px;">
+        <span id="user-email-display" style="font-size: 14px; color: #4b5563; font-weight: 500;">Carregando...</span>
+        <button id="btn-logout" style="background-color: #dc2626; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer;">Sair</button>
+    </div>
+</header>
+
+    <!-- Conteúdo Principal -->
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <div>
+                <h1>Visão Geral</h1>
+                <p>Gerencie suas câmaras frias em tempo real.</p>
+            </div>
+            <!-- Estilo inline apenas para ajustar a largura do botão neste caso específico -->
+            <button id="addMachineBtn" class="btn-primary" style="width: auto; display: flex; align-items: center; gap: 8px;">
+                <i class="ph ph-plus-circle" style="font-size: 20px;"></i> Nova Câmara
+            </button>
+        </div>
+
+        <!-- É aqui dentro que o JavaScript vai "injetar" os cartões das máquinas -->
+        <div class="machine-grid" id="machineGrid">
+            <!-- Cards carregados via JS -->
+        </div>
+    </main>
+
+    <!-- Script da página -->
+    <script src="../assets/js/dashboard.js"></script>
+
+    <!-- Modal de Adicionar Máquina (Oculto por padrão) -->
+    <div class="modal-overlay" id="addMachineModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adicionar Nova Câmara</h2>
+                <button class="close-modal" id="closeModalBtn">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            
+            <form id="addMachineForm">
+                <div class="input-group">
+                    <label for="machineName">Nome da Câmara</label>
+                    <input type="text" id="machineName" placeholder="Ex: Câmara de Congelados 01" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="machineLocation">Localização</label>
+                    <input type="text" id="machineLocation" placeholder="Ex: Galpão Sul" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="machineTarget">Temperatura Alvo (°C)</label>
+                    <input type="number" id="machineTarget" step="0.1" placeholder="Ex: -18.5" required>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar Câmara</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>
