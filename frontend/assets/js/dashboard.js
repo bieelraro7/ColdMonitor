@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- FUNÇÕES DE RENDERIZAÇÃO ---
-    function renderMachines() {
+   function renderMachines() {
         if (!machineGrid) return;
         machineGrid.innerHTML = '';
 
@@ -109,8 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="temp-display">${machine.temp.toFixed(1)}°C</div>
                     <div class="temp-target">Alvo: ${machine.target.toFixed(1)}°C</div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn-secondary" onclick="viewDetails(${machine.id})">Ver Detalhes</button>
+                <div class="card-footer" style="display: flex; gap: 8px;">
+                    <button class="btn-secondary" style="flex: 1;" onclick="viewDetails(${machine.id})">Detalhes</button>
+                    <button class="btn-secondary" style="flex: 1; background-color: #f3f4f6;" onclick="editMachine(${machine.id})">Editar</button>
+                    <button class="btn-secondary" style="flex: 1; background-color: #fee2e2; color: #ef4444; border-color: #fca5a5;" onclick="deleteMachine(${machine.id})">Excluir</button>
                 </div>
             `;
 
@@ -183,3 +185,70 @@ window.viewDetails = function(id) {
     window.location.href = `maquina.html?id=${id}`;
 };
 
+// Excluir câmara
+window.deleteMachine = async function(id) {
+    if (!confirm('Tem certeza que deseja excluir esta câmara fria?')) {
+        return;
+    }
+
+    const token = localStorage.getItem('@ColdMonitor:token');
+    try {
+        const response = await fetch(`http://192.168.3.14:3000/api/machines/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao excluir a câmara');
+        }
+
+        location.reload();
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Não foi possível excluir a câmara.');
+    }
+};
+
+// Editar câmara
+window.editMachine = async function(id) {
+    const token = localStorage.getItem('@ColdMonitor:token');
+    
+    // Busca os dados da câmara na lista carregada
+    const machine = machines.find(m => m.id === id);
+    if (!machine) return;
+
+    const newName = prompt("Novo nome da câmara:", machine.name);
+    if (newName === null) return;
+
+    const newLocation = prompt("Nova localização:", machine.location);
+    if (newLocation === null) return;
+
+    const newTarget = prompt("Nova temperatura alvo (°C):", machine.target);
+    if (newTarget === null) return;
+
+    try {
+        const response = await fetch(`http://192.168.3.14:3000/api/machines/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                name: newName,
+                location: newLocation,
+                target: parseFloat(newTarget)
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao atualizar a câmara');
+        }
+
+        location.reload();
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Não foi possível atualizar a câmara.');
+    }
+};
